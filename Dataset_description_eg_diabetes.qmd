@@ -1,0 +1,51 @@
+---
+title: "Dataset Description"
+author: "Pauline Ward"
+format: html
+editor: visual
+---
+
+## Dataset description
+
+```{r setting_up}
+source("packages.R")
+```
+
+```{r import_data}
+
+# Filename
+here()
+this_new_data_df <- read_csv(here("data", "NVJ7Cw98Eem6Pgo4-YwqLg_35bb00c00f7c11e9903947c521ebe81a_final-diabetes-data-for-R-_csv_-_2_.csv"),col_types = cols(row_num = col_double(), 
+                     id = col_character(), 
+                     insurance = col_character(), 
+                     smoking = col_character(),
+                     glyhb = col_double())) |>
+  clean_names()
+
+  
+```
+
+## Basic description
+
+Use main Base R tools
+
+```{r eda_base_basics}
+str(this_new_data_df)
+# summarize(this_new_data_df)
+glimpse(this_new_data_df)
+unique(this_new_data_df$gender)
+unique(this_new_data_df$smoking)
+# Pointless to do unique() on glyhb, clearly a continuous variable, with NA values. Will store as a double. 
+# unique(this_new_data_df$glyhb)
+```
+
+## Bit of plotting...
+
+```{r plots_a_plenty}
+basic_histogram <- this_new_data_df |> 
+  ggplot(aes(x=age)) + 
+  geom_histogram(binwidth=5) 
+# +
+#  theme_bw()
+basic_histogram
+```
